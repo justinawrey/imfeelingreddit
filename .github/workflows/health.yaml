@@ -7,7 +7,7 @@ on:
 
 jobs:
   format:
-    name: Check formatting
+    name: format
     runs-on: ubuntu-latest
 
     steps:
@@ -27,7 +27,7 @@ jobs:
         run: pnpm exec prettier . --check
 
   build:
-    name: Check build
+    name: build
     runs-on: ubuntu-latest
 
     steps:
