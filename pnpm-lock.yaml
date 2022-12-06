@@ -1,13 +1,15 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@astrojs/cloudflare': ^4.1.0
   '@astrojs/tailwind': ^2.1.3
-  astro: ^1.6.12
+  astro: ^1.6.11
   prettier: ^2.8.0
   prettier-plugin-astro: ^0.7.0
   tailwindcss: ^3.0.24
 
 dependencies:
+  '@astrojs/cloudflare': 4.1.0_astro@1.6.12
   '@astrojs/tailwind': 2.1.3_tailwindcss@3.2.4
   astro: 1.6.12
   tailwindcss: 3.2.4
@@ -24,6 +26,16 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.1.1
       '@jridgewell/trace-mapping': 0.3.17
+    dev: false
+
+  /@astrojs/cloudflare/4.1.0_astro@1.6.12:
+    resolution: {integrity: sha512-BDuNFi1sA9qx6Jiei+cVhbGrmd0w/IdN9CD861M8fT8/k2P08py1jubzp3SZ5PcOWudyvKjQhkb7ON5JkniIcg==}
+    peerDependencies:
+      astro: ^1.6.11
+    dependencies:
+      astro: 1.6.12
+      esbuild: 0.14.54
+      tiny-glob: 0.2.9
     dev: false
 
   /@astrojs/compiler/0.29.19:
