@@ -1,12 +1,11 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Shell from "../layouts/Shell.astro";
+import Search from "../components/Search.jsx";
 ---
 
-<Layout title="I'm feeling Reddit">
-  <main>
-    <h1>I'm feeling Reddit</h1>
+<Shell>
+  <main class="h-full flex flex-col justify-center items-center">
+    <h1 class="italic font-bold text-3xl">I'm feeling Reddit</h1>
+    <Search client:load />
   </main>
-  <script>
-    const hi = "test";
-  </script>
-</Layout>
+</Shell>
