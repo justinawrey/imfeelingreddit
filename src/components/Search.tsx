@@ -29,7 +29,7 @@ export default function Search() {
       <div>
         <Show when={!loading()} fallback={Loading}>
           <input
-            class="border focus:outline-slate-300"
+            class="border outline-none"
             value={searchText()}
             onInput={(e) => setSearchText((e.target as HTMLInputElement).value)}
             placeholder="Search all of reddit..."
