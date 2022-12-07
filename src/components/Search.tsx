@@ -1,4 +1,4 @@
-import { createSignal, Show } from "solid-js";
+import { createSignal, onCleanup, Show } from "solid-js";
 import search from "../api/search";
 
 const [searchText, setSearchText] = createSignal("");
@@ -22,6 +22,11 @@ async function gotoFirstRedditResult() {
 }
 
 export default function Search() {
+  onCleanup(() => {
+    setLoading(false);
+    setFailed(false);
+  });
+
   const Loading = <div>Please hold... &#128222;</div>;
 
   return (
