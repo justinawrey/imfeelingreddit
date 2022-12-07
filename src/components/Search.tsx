@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, onMount, Show } from "solid-js";
+import { createSignal, onMount, Show } from "solid-js";
 import search from "../api/search";
 
 const [searchText, setSearchText] = createSignal("");
@@ -21,6 +21,11 @@ async function gotoFirstRedditResult() {
   window.location.href = result;
 }
 
+function performSearch(e: KeyboardEvent) {
+  if (e.key !== "Enter") return;
+  gotoFirstRedditResult();
+}
+
 export default function Search() {
   onMount(() => {
     setLoading(false);
@@ -37,6 +42,7 @@ export default function Search() {
             class="border outline-none"
             value={searchText()}
             onInput={(e) => setSearchText((e.target as HTMLInputElement).value)}
+            onKeyDown={performSearch}
             placeholder="Search all of reddit..."
             autofocus
           />
