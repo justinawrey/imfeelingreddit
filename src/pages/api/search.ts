@@ -10,9 +10,9 @@ function hasResults(results: any) {
 
 async function getFirstRedditResultLink(query: string): Promise<string | null> {
   const response = await fetch(
-    `https://serpapi.com/search.json?engine=google&api_key=ce8f801fa3ebd82083e30846141656e40256476030c9fc738f1927a5df60f63d&q=${makeRedditQuery(
-      query
-    )}`
+    `https://serpapi.com/search.json?engine=google&api_key=${
+      import.meta.env.SERPAPI_KEY
+    }&q=${makeRedditQuery(query)}`
   );
   const results = await response.json();
 
