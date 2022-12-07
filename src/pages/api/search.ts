@@ -29,9 +29,6 @@ export const get: APIRoute = async ({ request }) => {
   }
 
   const redditLink = await getFirstRedditResultLink(query);
-  if (!redditLink) {
-    return new Response(JSON.stringify({ link: null }), { status: 204 });
-  }
 
   return new Response(
     JSON.stringify({
