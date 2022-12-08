@@ -38,7 +38,7 @@ const SearchWidget = (
       placeholder="Search all of reddit..."
     />
     <Button onClick={() => searchText() && navigate("/results")}>Search</Button>
-    <Button onClick={() => searchText() && gotoFirstRedditResult}>
+    <Button onClick={() => searchText() && gotoFirstRedditResult()}>
       Try my luck
     </Button>
   </>
