@@ -31,7 +31,7 @@ function filterBy(e: KeyboardEvent, event: string, cb: () => void) {
   cb();
 }
 
-const Loading = <p>Please hold... &#128222;/* phone emoji */</p>;
+const Loading = <p>Please hold... &#128222;</p>;
 const SearchWidget = (
   <>
     <Input
