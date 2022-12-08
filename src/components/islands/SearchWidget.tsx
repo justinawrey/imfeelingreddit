@@ -11,8 +11,6 @@ function navigate(url: string) {
 }
 
 async function gotoFirstRedditResult() {
-  if (!searchText()) return;
-
   setFailed(false);
   setLoading(true);
   const result = await search(searchText());
@@ -26,11 +24,6 @@ async function gotoFirstRedditResult() {
   navigate(result);
 }
 
-function filterBy(e: KeyboardEvent, event: string, cb: () => void) {
-  if (e.key !== event) return;
-  cb();
-}
-
 let input: HTMLInputElement | undefined;
 const Loading = <p>Please hold... &#128222;</p>;
 const SearchWidget = (
@@ -39,11 +32,15 @@ const SearchWidget = (
       ref={input}
       value={searchText()}
       onInput={(e) => setSearchText((e.target as HTMLInputElement).value)}
-      onKeyDown={(e) => filterBy(e, "Enter", gotoFirstRedditResult)}
+      onKeyDown={(e) =>
+        e.key === "Enter" && searchText() && navigate("/results")
+      }
       placeholder="Search all of reddit..."
     />
-    <Button onClick={() => navigate("/results")}>Search</Button>
-    <Button onClick={gotoFirstRedditResult}>Try my luck</Button>
+    <Button onClick={() => searchText() && navigate("/results")}>Search</Button>
+    <Button onClick={() => searchText() && gotoFirstRedditResult}>
+      Try my luck
+    </Button>
   </>
 );
 
