@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 import search from "@api/search";
 import { Button, Input } from "@components/lib";
 
@@ -31,15 +31,16 @@ function filterBy(e: KeyboardEvent, event: string, cb: () => void) {
   cb();
 }
 
+let input: HTMLInputElement | undefined;
 const Loading = <p>Please hold... &#128222;</p>;
 const SearchWidget = (
   <>
     <Input
+      ref={input}
       value={searchText()}
       onInput={(e) => setSearchText((e.target as HTMLInputElement).value)}
       onKeyDown={(e) => filterBy(e, "Enter", gotoFirstRedditResult)}
       placeholder="Search all of reddit..."
-      autofocus
     />
     <Button onClick={() => navigate("/results")}>Search</Button>
     <Button onClick={gotoFirstRedditResult}>Try my luck</Button>
@@ -47,6 +48,11 @@ const SearchWidget = (
 );
 
 export default function Search() {
+  onMount(() => {
+    // We are sure that the input exists here, as guaranteed by solid
+    input!.focus();
+  });
+
   return (
     <>
       <div>{loading() ? Loading : SearchWidget}</div>
