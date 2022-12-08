@@ -1,6 +1,6 @@
 ---
-import Shell from "../layouts/Shell.astro";
-import Search from "../components/Search.jsx";
+import Shell from "@layouts/Shell.astro";
+import SearchWidget from "@components/islands/SearchWidget.jsx";
 ---
 
 <Shell>
@@ -11,6 +11,6 @@ import Search from "../components/Search.jsx";
     >
       I'm feeling Reddit
     </h1>
-    <Search client:load />
+    <SearchWidget client:load />
   </main>
 </Shell>
