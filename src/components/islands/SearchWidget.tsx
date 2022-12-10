@@ -1,5 +1,5 @@
 import { createSignal, onMount } from "solid-js";
-import search from "src/api-client/search";
+import search from "@api-client/search";
 import { Button, Input } from "@components/lib";
 
 const [searchText, setSearchText] = createSignal("");
