@@ -1,5 +1,5 @@
 import { createSignal, onMount } from "solid-js";
-import search from "@api-client/search";
+import { searchFirst } from "@api-client/search";
 import { Button, Input } from "@components/lib";
 
 const [searchText, setSearchText] = createSignal("");
@@ -13,7 +13,7 @@ function navigate(url: string) {
 async function gotoFirstRedditResult() {
   setFailed(false);
   setLoading(true);
-  const result = await search(searchText());
+  const result = await searchFirst(searchText());
 
   if (!result) {
     setLoading(false);
@@ -33,11 +33,17 @@ const SearchWidget = (
       value={searchText()}
       onInput={(e) => setSearchText((e.target as HTMLInputElement).value)}
       onKeyDown={(e) =>
-        e.key === "Enter" && searchText() && navigate("/results")
+        e.key === "Enter" &&
+        searchText() &&
+        navigate(`/search?query=${searchText()}`)
       }
       placeholder="Search all of reddit..."
     />
-    <Button onClick={() => searchText() && navigate("/results")}>Search</Button>
+    <Button
+      onClick={() => searchText() && navigate(`/search?query=${searchText()}`)}
+    >
+      Search
+    </Button>
     <Button onClick={() => searchText() && gotoFirstRedditResult()}>
       Try my luck
     </Button>

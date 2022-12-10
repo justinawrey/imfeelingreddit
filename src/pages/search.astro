@@ -1,0 +1,19 @@
+---
+import Shell from "@layouts/Shell.astro";
+import { searchAll } from "@api-client/search";
+
+const query = Astro.url.searchParams.get("query");
+
+// TODO: 400 this
+if (!query) return;
+
+const searchResults = await searchAll(query, Astro.url);
+---
+
+<Shell>
+  <main class="h-full flex flex-col justify-center items-center">
+    <pre>
+      {searchResults}
+    </pre>
+  </main>
+</Shell>
