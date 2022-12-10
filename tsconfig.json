@@ -5,7 +5,7 @@
     "jsxImportSource": "solid-js",
     "baseUrl": ".",
     "paths": {
-      "@api/*": ["./src/api/*"],
+      "@api-client/*": ["src/api-client/*"],
       "@components/*": ["./src/components/*"],
       "@layouts/*": ["./src/layouts/*"]
     }
