@@ -12,13 +12,21 @@ export default class SearchResult {
     this.displayLink = resultJson["displayed_link"];
     this.snippet = resultJson["snippet"];
     this.date = resultJson["date"];
-    this.snippetHighlightedWords = resultJson["snippet_highlighted_words"];
+
+    if (resultJson["snippet_highlighted_words"]) {
+      this.snippetHighlightedWords = [
+        ...new Set(resultJson["snippet_highlighted_words"] as string[]),
+      ].sort((a, b) => b.length - a.length);
+    } else {
+      this.snippetHighlightedWords = [];
+    }
   }
 
   get highlightedSnippet() {
     let highlightedSnippet = this.snippet;
     this.snippetHighlightedWords.forEach((word) => {
-      highlightedSnippet = highlightedSnippet.replace(word, `<b>${word}</b>`);
+      const re = new RegExp(`(?<!<b>)${word}(?!<\/b>)`, "g");
+      highlightedSnippet = highlightedSnippet.replace(re, `<b>${word}</b>`);
     });
     return highlightedSnippet;
   }
