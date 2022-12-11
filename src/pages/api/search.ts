@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { JsonResponse } from "@util/json-response";
+import { JsonResponse } from "./_json-response";
 
 function makeRedditQuery(query: string): string {
   return `${query.trim()} site:reddit.com`;
