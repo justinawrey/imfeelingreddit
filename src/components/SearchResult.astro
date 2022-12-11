@@ -11,8 +11,8 @@ interface Props {
 const { title, link, snippet, displayLink } = Astro.props;
 ---
 
-<div class="last:pb-8">
+<li class="last:pb-8">
   <p class="text-xs">{displayLink}</p>
   <Link href={link}>{title}</Link>
   <p class="text-sm" set:html={snippet} />
-</div>
+</li>

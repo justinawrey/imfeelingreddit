@@ -20,7 +20,7 @@ const searchResults = await searchAll(query, Astro.url);
       <Title />
       <SearchWidget initialText={query} focus={false} client:load />
     </div>
-    <div class="space-y-8 max-w-2xl mb-8">
+    <ul class="space-y-8 max-w-2xl mb-8">
       {
         searchResults.map(
           ({ title, link, highlightedSnippet, displayLink }) => (
@@ -33,6 +33,6 @@ const searchResults = await searchAll(query, Astro.url);
           )
         )
       }
-    </div>
+    </ul>
   </main>
 </Shell>
