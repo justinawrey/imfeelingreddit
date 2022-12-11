@@ -16,7 +16,7 @@ async function getResults(query: string): Promise<any> {
 
 // Proxy request to serpapi
 export const get: APIRoute = async ({ request }) => {
-  const query = new URLSearchParams(new URL(request.url).search).get("query");
+  const query = new URL(request.url).searchParams.get("query");
 
   if (!query) {
     return new BadRequestResponse("No query provided");
