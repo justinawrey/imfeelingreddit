@@ -1,4 +1,10 @@
-async function searchAll(query: string, baseURL?: URL): Promise<any> {
+import SearchResult from "./search-result";
+
+function hasSearchResults(searchResults: any) {
+  return searchResults["organic_results"]?.length > 0;
+}
+
+async function search(query: string, baseURL?: URL): Promise<any> {
   const relativeURL = `/api/search?query=${query}`;
   let response: Response;
 
@@ -11,14 +17,26 @@ async function searchAll(query: string, baseURL?: URL): Promise<any> {
   return response.json();
 }
 
+async function searchAll(
+  query: string,
+  baseURL?: URL
+): Promise<SearchResult[]> {
+  const searchResults = await search(query, baseURL);
+  return hasSearchResults(searchResults)
+    ? searchResults["organic_results"].map(
+        (resultJson: any) => new SearchResult(resultJson)
+      )
+    : [];
+}
+
 async function searchFirst(
   query: string,
   baseURL?: URL
 ): Promise<string | null> {
-  const results = await searchAll(query, baseURL);
-  const hasResults = results["organic_results"]?.length > 0;
-
-  return hasResults ? results["organic_results"][0]["link"] : null;
+  const searchResults = await search(query, baseURL);
+  return hasSearchResults(searchResults)
+    ? searchResults["organic_results"][0]["link"]
+    : null;
 }
 
 export { searchAll, searchFirst };
