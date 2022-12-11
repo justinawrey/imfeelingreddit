@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { JsonResponse } from "./_json-response";
+import { JsonResponse, BadRequestResponse } from "./_response";
 
 function makeRedditQuery(query: string): string {
   return `${query.trim()} site:reddit.com`;
@@ -19,7 +19,7 @@ export const get: APIRoute = async ({ request }) => {
   const query = new URLSearchParams(new URL(request.url).search).get("query");
 
   if (!query) {
-    return new Response("No query provided", { status: 400 });
+    return new BadRequestResponse("No query provided");
   }
 
   return new JsonResponse(await getResults(query));
