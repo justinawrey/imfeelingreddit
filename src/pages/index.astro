@@ -1,16 +1,12 @@
 ---
 import Shell from "@layouts/Shell.astro";
+import Title from "@components/Title.astro";
 import SearchWidget from "@components/islands/SearchWidget";
 ---
 
 <Shell>
   <main class="h-full flex flex-col justify-center items-center">
-    <h1
-      class="italic font-bold text-3xl mb-2"
-      style="text-shadow: -3px -3px #fbceb1;"
-    >
-      I'm feeling Reddit
-    </h1>
+    <Title />
     <SearchWidget client:load />
   </main>
 </Shell>
