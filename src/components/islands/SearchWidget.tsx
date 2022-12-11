@@ -50,10 +50,22 @@ const SearchWidget = (
   </>
 );
 
-export default function Search() {
+export default function Search(
+  props: { initialText?: string; focus?: boolean } = {
+    initialText: "",
+    focus: true,
+  }
+) {
   onMount(() => {
     // We are sure that the input exists here, as guaranteed by solid
-    input!.focus();
+    if (props.focus) {
+      input!.focus();
+    }
+
+    // TODO: this flickers!
+    if (props.initialText) {
+      setSearchText(props.initialText);
+    }
   });
 
   return (

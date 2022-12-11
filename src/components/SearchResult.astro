@@ -1,0 +1,18 @@
+---
+import Link from "@components/lib/Link.astro";
+
+interface Props {
+  title: string;
+  link: string;
+  snippet: string;
+  displayLink: string;
+}
+
+const { title, link, snippet, displayLink } = Astro.props;
+---
+
+<div>
+  <p class="text-xs">{displayLink}</p>
+  <Link href={link}>{title}</Link>
+  <p class="text-sm" set:html={snippet} />
+</div>

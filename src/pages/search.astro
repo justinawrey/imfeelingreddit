@@ -1,5 +1,8 @@
 ---
 import Shell from "@layouts/Shell.astro";
+import SearchResult from "@components/SearchResult.astro";
+import Title from "@components/Title.astro";
+import SearchWidget from "@components/islands/SearchWidget";
 import { searchAll } from "@api-client/search";
 
 const query = Astro.url.searchParams.get("query");
@@ -12,9 +15,18 @@ const searchResults = await searchAll(query, Astro.url);
 ---
 
 <Shell>
-  <main class="h-full flex flex-col justify-center items-center">
-    <pre>
-      {searchResults}
-    </pre>
+  <main class="h-full space-y-8 ml-24 mt-8">
+    <Title />
+    <SearchWidget initialText={query} focus={false} client:load />
+    {
+      searchResults.map(({ title, link, highlightedSnippet, displayLink }) => (
+        <SearchResult
+          title={title}
+          link={link}
+          snippet={highlightedSnippet}
+          displayLink={displayLink}
+        />
+      ))
+    }
   </main>
 </Shell>
