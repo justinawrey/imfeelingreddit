@@ -4,7 +4,7 @@ export default class SearchResult {
   displayLink: string;
   snippet: string;
   snippetHighlightedWords: string[];
-  date: string;
+  date?: string;
 
   constructor(resultJson: any) {
     this.title = resultJson["title"];
@@ -34,5 +34,12 @@ export default class SearchResult {
   // Sometimes 'site:reddit.com' doesn't work so filter manually (maybe its just the scraper?)
   isRedditLink() {
     return this.link.includes("reddit.com");
+  }
+
+  get subreddit() {
+    const re = /com\/(?<subreddit>r\/\w+)\//g;
+    const matches = this.link.matchAll(re);
+
+    return matches ? [...matches][0][1] : undefined;
   }
 }

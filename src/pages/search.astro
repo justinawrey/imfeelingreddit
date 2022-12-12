@@ -23,12 +23,21 @@ const searchResults = await searchAll(query, Astro.url);
     <ul class="space-y-8 max-w-2xl mb-8">
       {
         searchResults.map(
-          ({ title, link, highlightedSnippet, displayLink }) => (
+          ({
+            title,
+            link,
+            highlightedSnippet,
+            displayLink,
+            date,
+            subreddit,
+          }) => (
             <SearchResult
               title={title}
               link={link}
               snippet={highlightedSnippet}
               displayLink={displayLink}
+              date={date}
+              subreddit={subreddit}
             />
           )
         )

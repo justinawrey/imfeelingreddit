@@ -1,18 +1,25 @@
 ---
 import Link from "@components/lib/Link.astro";
+import Pill from "@components/lib/Pill.astro";
 
 interface Props {
   title: string;
   link: string;
   snippet: string;
   displayLink: string;
+  subreddit?: string;
+  date?: string;
 }
 
-const { title, link, snippet, displayLink } = Astro.props;
+const { title, link, snippet, displayLink, subreddit, date } = Astro.props;
 ---
 
 <li class="last:pb-8">
-  <p class="text-xs">{displayLink}</p>
+  <p class="text-xs text-slate-700">{displayLink}</p>
   <Link href={link}>{title}</Link>
   <p class="text-sm" set:html={snippet} />
+  <div class="flex space-x-2 mt-1">
+    {date ? <Pill class="text-xs">{date}</Pill> : null}
+    {subreddit ? <Pill class="text-xs">{subreddit}</Pill> : null}
+  </div>
 </li>
