@@ -22,11 +22,11 @@ async function searchAll(
   baseURL?: URL
 ): Promise<SearchResult[]> {
   const searchResults = await search(query, baseURL);
-  return hasSearchResults(searchResults)
-    ? searchResults["organic_results"].map(
-        (resultJson: any) => new SearchResult(resultJson)
-      )
-    : [];
+  const filteredSearchResults = searchResults["organic_results"]
+    .map((searchResult: any) => new SearchResult(searchResult))
+    .filter((searchResult: SearchResult) => searchResult.isRedditLink());
+
+  return hasSearchResults(searchResults) ? filteredSearchResults : [];
 }
 
 async function searchFirst(

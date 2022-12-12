@@ -30,4 +30,9 @@ export default class SearchResult {
     });
     return highlightedSnippet;
   }
+
+  // Sometimes 'site:reddit.com' doesn't work so filter manually (maybe its just the scraper?)
+  isRedditLink() {
+    return this.link.includes("reddit.com");
+  }
 }
